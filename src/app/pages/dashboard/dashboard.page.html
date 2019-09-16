@@ -6,13 +6,53 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-back-button></ion-back-button>
   <h1>Dashboard</h1>
   <ion-avatar>
     <img src="../../../assets/icon/perfil.jpeg">
   </ion-avatar>
   <div text-center>
-    <h3>Au-au</h3>
+    <h2>Au-au</h2>
   </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card [color]="cor">
+          <ion-card-title>
+            Saldo
+          </ion-card-title>
+          <ion-card-content>
+            <h2>R$ {{saldo}}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card color="medium">
+          <ion-card-title>
+            Total a pagar
+          </ion-card-title>
+          <ion-card-content>
+            <h2>R$ 1.423,34</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card color="medium">
+          <ion-card-title>Total a receber</ion-card-title>
+          <ion-card-content>
+            R$ 1.423,99
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="sair()" expand="block" shape="round">Sair</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

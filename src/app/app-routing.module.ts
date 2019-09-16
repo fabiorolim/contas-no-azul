@@ -8,6 +8,7 @@ const routes: Routes = [
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'registrar', loadChildren: './pages/registrar/registrar.module#RegistrarPageModule' },
+  { path: 'nova-conta', loadChildren: './pages/nova-conta/nova-conta.module#NovaContaPageModule' },
   // { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule' },
   // { path: 'pagar', loadChildren: './pages/pagar/pagar.module#PagarPageModule' },
   // { path: 'receber', loadChildren: './pages/receber/receber.module#ReceberPageModule' }
