@@ -8,10 +8,10 @@
 <ion-content padding>
   <h1>Dashboard</h1>
   <ion-avatar>
-    <img src="../../../assets/icon/perfil.jpeg">
+    <img async [src]="foto">
   </ion-avatar>
   <div text-center>
-    <h2>Au-au</h2>
+    <h2>{{ nomeUsuario }}</h2>
   </div>
   <ion-grid>
     <ion-row>
@@ -21,7 +21,7 @@
             Saldo
           </ion-card-title>
           <ion-card-content>
-            <h2>R$ {{saldo}}</h2>
+            <h2>R$ {{totalReceber - totalPagar}}</h2>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -33,7 +33,7 @@
             Total a pagar
           </ion-card-title>
           <ion-card-content>
-            <h2>R$ 1.423,34</h2>
+            <h2>R$ {{totalPagar}}</h2>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -43,7 +43,7 @@
         <ion-card color="medium">
           <ion-card-title>Total a receber</ion-card-title>
           <ion-card-content>
-            R$ 1.423,99
+            R$ {{totalReceber}}
           </ion-card-content>
         </ion-card>
       </ion-col>

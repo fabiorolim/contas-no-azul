@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PagarPage } from './pagar.page';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    AngularFirestoreModule,
     RouterModule.forChild(routes)
   ],
   declarations: [PagarPage]

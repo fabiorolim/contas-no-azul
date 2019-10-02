@@ -1,23 +1,23 @@
 <ion-content color="primary" padding>
-  <form #form="ngForm" (ngSubmit)="login(form)">
+  <form [formGroup]="formLogin" (submit)="login()">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center>
-            <img src="../assets/icon/logo.png"/>
+            <img src="../assets/icon/logo.png" />
             <h3>Contas no Azul</h3>
           </div>
           <div padding>
             <ion-item>
-              <ion-input name="email" type="email" placeholder="joao@email.com" ngModel required></ion-input>
+              <ion-input name="email" type="email" placeholder="joao@email.com" formControlName="email" required>
+              </ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="password" type="password" placeholder="senha" ngModel required></ion-input>
+              <ion-input name="senha" type="password" placeholder="senha" formControlName="senha" required></ion-input>
             </ion-item>
           </div>
           <div padding>
-            <!-- <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Entrar</ion-button> -->
-            <ion-button size="large" type="submit" expand="block">Entrar</ion-button>
+            <ion-button size="large" type="submit" [disabled]="formLogin.invalid" expand="block">Entrar</ion-button>
           </div>
         </ion-col>
       </ion-row>

@@ -7,27 +7,28 @@
 
 
 <ion-content>
-  <form #form="ngForm" (ngSubmit)="novaConta(form)">
+  <form [formGroup]="form" (submit)="onSubmit()">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <h3>Nova conta</h3>
+          <h3>Nova conta a receber</h3>
           <div padding>
             <ion-item>
-              <ion-input name="descricao" type="text" placeholder="Descrição" required></ion-input>
+              <ion-input name="descricao" type="text" formControlName="descricao" placeholder="Descrição" required>
+              </ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="valor" type="number" placeholder="123.45" required></ion-input>
+              <ion-input name="valor" type="number" placeholder="123.45" formControlName="valor" required></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-select text-center placeholder="Selecione o tipo" name="tipo">
+            <!-- <ion-item>
+              <ion-select text-center placeholder="Selecione o tipo" formControlName="tipo">
                 <ion-select-option value="pagar">Pagar</ion-select-option>
                 <ion-select-option value="receber">Receber</ion-select-option>
               </ion-select>
-            </ion-item>
+            </ion-item> -->
           </div>
           <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Criar</ion-button>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Salvar</ion-button>
           </div>
         </ion-col>
       </ion-row>

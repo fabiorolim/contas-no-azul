@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NovaContaPage } from './nova-conta.page';
+import { NovaContaPagarPage } from './nova-conta-pagar.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: NovaContaPage
+    component: NovaContaPagarPage
   }
 ];
 
@@ -19,8 +19,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [NovaContaPage]
+  declarations: [NovaContaPagarPage]
 })
-export class NovaContaPageModule {}
+export class NovaContaPagarPageModule { }

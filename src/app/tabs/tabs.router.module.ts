@@ -1,3 +1,4 @@
+import { AuthGuard } from './../core/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
@@ -6,6 +7,7 @@ const routes: Routes = [
   {
     path: 'tabs',
     component: TabsPage,
+    // canActivateChild: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -13,7 +15,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/dashboard/dashboard.module').then(m => m.DashboardPageModule)
+              import('../pages/dashboard/dashboard.module').then(m => m.DashboardPageModule),
+            canLoad: [AuthGuard]
           }
         ]
       },
@@ -23,7 +26,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/pagar/pagar.module').then(m => m.PagarPageModule)
+              import('../pages/pagar/pagar.module').then(m => m.PagarPageModule),
+            canLoad: [AuthGuard]
           }
         ]
       },
@@ -33,7 +37,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/receber/receber.module').then(m => m.ReceberPageModule)
+              import('../pages/receber/receber.module').then(m => m.ReceberPageModule),
+            canLoad: [AuthGuard]
           }
         ]
       },

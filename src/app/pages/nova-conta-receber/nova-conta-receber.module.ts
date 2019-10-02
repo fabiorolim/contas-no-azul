@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegistrarPage } from './registrar.page';
+import { NovaContaReceberPage } from './nova-conta-receber.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: RegistrarPage
+    component: NovaContaReceberPage
   }
 ];
 
@@ -22,6 +22,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [RegistrarPage]
+  declarations: [NovaContaReceberPage]
 })
-export class RegistrarPageModule {}
+export class NovaContaReceberPageModule { }

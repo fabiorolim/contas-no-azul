@@ -9,28 +9,15 @@
   <ion-back-button></ion-back-button>
   <h1>Contas a Pagar</h1>
   <ion-searchbar placeholder="Buscar"></ion-searchbar>
-  <ion-fab routerLink="/nova-conta" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab routerLink="/nova-conta-pagar" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-list>
+  <ion-list lines="full" *ngIf="(contas$ | async) as contas">
     <ion-item-sliding side="end">
-      <ion-item>
-        <ion-label>Café R$ 8,00</ion-label>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option color="success">
-          Alterar
-        </ion-item-option>
-        <ion-item-option color="danger">
-          Excluir
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-item-sliding side="end">
-      <ion-item>
-        <ion-label>Café R$ 8,00</ion-label>
+      <ion-item *ngFor="let conta of contas">
+        <ion-label>{{ conta.descricao }} - {{ conta.valor }}</ion-label>
       </ion-item>
       <ion-item-options>
         <ion-item-option color="success">
