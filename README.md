@@ -17,7 +17,11 @@ Aplicativo para estudos da disciplina de Tópicos especiais em desenvolvimento m
 
 * Crie uma conta no <a href="https://firebase.google.com">Firebase</a>
 
-* Configure um app da Web
+* Adicione um novo projeto
+
+* Crie um app da Web
+
+* Habilite a autenticação por email e senha
 
 * Copie suas configruações para o arquivo enviroments.ts
 
