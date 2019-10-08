@@ -33,7 +33,7 @@ export class NovaContaPagarPage implements OnInit {
       message: 'Salvando...',
       ...options
     });
-    await load.present();
+    load.present();
     return load;
   }
 
@@ -45,7 +45,7 @@ export class NovaContaPagarPage implements OnInit {
       closeButtonText: 'Ok',
       ...options
     });
-    await toast.present();
+    toast.present();
     return toast;
   }
 
@@ -64,7 +64,7 @@ export class NovaContaPagarPage implements OnInit {
       this.navCtrl.navigateBack('/tabs/pagar');
     } catch (e) {
       console.log('Erro ao tentar salvar conta', e);
-      await this.toast({ message: e.message });
+      this.toast({ message: e.message });
     } finally {
       loading.dismiss();
     }

@@ -32,7 +32,7 @@ export class Calculador {
             message: 'Carregando contas...',
             ...options
         });
-        await load.present();
+        load.present();
         return load;
     }
 
@@ -40,7 +40,7 @@ export class Calculador {
         try {
             const load = await this.load();
             this.contasPagar$ = this.contaPagarService.getAll();
-            this.contasPagar$.pipe(take(1)).subscribe(contas => {
+            this.contasPagar$.subscribe(contas => {
                 this.contasPagar = contas;
                 load.dismiss();
             });
@@ -55,7 +55,7 @@ export class Calculador {
         try {
             const load = await this.load();
             this.contasReceber$ = this.contaReceberService.getAll();
-            this.contasReceber$.pipe(take(1)).subscribe(contas => {
+            this.contasReceber$.subscribe(contas => {
                 this.contasReceber = contas;
                 load.dismiss();
             });

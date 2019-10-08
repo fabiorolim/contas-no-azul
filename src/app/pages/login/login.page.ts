@@ -34,6 +34,10 @@ export class LoginPage implements OnInit {
     this.createForm();
   }
 
+  calculaSalario(): number {
+    return 2;
+  }
+
   private createForm() {
     this.formLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -43,7 +47,7 @@ export class LoginPage implements OnInit {
 
   async alert(options?: AlertOptions): Promise<HTMLIonAlertElement> {
     const alert = await this.alertControl.create(options);
-    await alert.present();
+    alert.present();
     return alert;
   }
 
@@ -52,7 +56,7 @@ export class LoginPage implements OnInit {
       message: 'Aguarde...',
       ...options
     });
-    await load.present();
+    load.present();
     return load;
   }
 
@@ -64,7 +68,7 @@ export class LoginPage implements OnInit {
       closeButtonText: 'Ok',
       ...options
     });
-    await toast.present();
+    toast.present();
     return toast;
   }
 

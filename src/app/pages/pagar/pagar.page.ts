@@ -26,14 +26,14 @@ export class PagarPage {
       message: 'Carregando contas...',
       ...options
     });
-    await load.present();
+    load.present();
     return load;
   }
 
   async ionViewWillEnter() {
     const load = await this.load();
     this.contas$ = this.contaPagarService.getAll();
-    this.contas$.pipe(take(1)).subscribe(() => load.dismiss());
+    this.contas$.subscribe(() => load.dismiss());
   }
 }
 
