@@ -1,27 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-back-button slot="start"></ion-back-button>
     <ion-title>Contas no Azul</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-back-button></ion-back-button>
   <h1>Contas a Receber</h1>
   <ion-searchbar placeholder="Buscar"></ion-searchbar>
-  <ion-fab routerLink="/nova-conta-pagar" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
+  <ion-list *ngIf="(contas$ | async) as contas">
+    <ng-container *ngIf="contas.length > 0; else noContas">
+      <app-item-conta *ngFor="let conta of contas" [conta]="conta" (update)="onUpdate($event)"
+        (delete)="onDelete($event)"></app-item-conta>
+    </ng-container>
+    <ng-template #noContas>
+      <ion-item lines="none">Nenhuma conta cadastrada!</ion-item>
+    </ng-template>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/nova-conta-receber" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-list lines="full" *ngIf="(contas$ | async) as contas">
-    <ion-item *ngFor="let conta of contas">
-      <ion-icon color="success" name="cash" slot="start"></ion-icon>
-      <ion-label>{{ conta.descricao }} - R$ {{ conta.valor }}</ion-label>
-    </ion-item>
-  </ion-list>
-  <!-- <ng-template #no-contas>
-    <ion-icon name="alert"></ion-icon>
-    <label>Não há contas cadastradas</label>
-  </ng-template> -->
+
 </ion-content>

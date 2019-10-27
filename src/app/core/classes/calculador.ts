@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
 import { ContaPagarService } from '../services/conta-pagar.service';
 import { ContaReceberService } from '../services/conta-receber.service';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { LoadingOptions } from '@ionic/core';
 
 
 
@@ -24,46 +22,25 @@ export class Calculador {
     constructor(
         private contaPagarService: ContaPagarService,
         private contaReceberService: ContaReceberService,
-        private loadingController: LoadingController
     ) { }
 
-    async load(options?: LoadingOptions): Promise<HTMLIonLoadingElement> {
-        const load = await this.loadingController.create({
-            message: 'Carregando contas...',
-            ...options
+
+    async loadContasPagar() {
+        this.contasPagar$ = await this.contaPagarService.getAll();
+        await this.contasPagar$.subscribe(contas => {
+            this.contasPagar = contas;
         });
-        load.present();
-        return load;
+        console.log(this.contasPagar$);
     }
 
-    async loadContasPagar(): Promise<void> {
-        try {
-            const load = await this.load();
-            this.contasPagar$ = this.contaPagarService.getAll();
-            this.contasPagar$.subscribe(contas => {
-                this.contasPagar = contas;
-                load.dismiss();
-            });
-            console.log(this.contasPagar$);
-        }
-        catch (e) {
-            console.log('Erro:', e);
-        }
-    }
-
-    async loadContasReceber(): Promise<void> {
-        try {
-            const load = await this.load();
-            this.contasReceber$ = this.contaReceberService.getAll();
-            this.contasReceber$.subscribe(contas => {
-                this.contasReceber = contas;
-                load.dismiss();
-            });
-            console.log(this.contasPagar$);
-        }
-        catch (e) {
-            console.log('Erro:', e);
-        }
+    loadContasReceber() {
+        this.contasReceber$ = this.contaReceberService.getAll();
+        this.contasReceber$.subscribe(contas => {
+            this.contasReceber = contas;
+            // load.dismiss();
+        });
+        console.log(this.contasPagar$);
+        console.log(this.contasPagar);
     }
 
     async calculaTotalReceber(): Promise<number> {

@@ -20,7 +20,6 @@ export class LoginPage implements OnInit {
   formLogin: FormGroup;
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
     private loginService: AuthService,
     private alertControl: AlertController,

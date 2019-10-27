@@ -4,6 +4,8 @@ import { ContaReceberService } from 'src/app/core/services/conta-receber.service
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { LoadingOptions, ToastOptions } from '@ionic/core';
+import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -15,17 +17,38 @@ export class NovaContaReceberPage implements OnInit {
 
   form: FormGroup;
   conta: Conta;
+  titulo: string;
+  contaId: string;
 
   constructor(
     private fb: FormBuilder,
     private contaReceberService: ContaReceberService,
     private loadingController: LoadingController,
     private toastController: ToastController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.createForm();
+    this.init();
+  }
+
+  init(): void {
+    const contaId = this.route.snapshot.paramMap.get('id');
+    if (!contaId) {
+      this.titulo = 'Nova Conta a Receber';
+      return;
+    }
+    this.contaId = contaId;
+    this.titulo = 'Editar Conta a Receber';
+    this.contaReceberService
+      .get(contaId)
+      .pipe(take(1))
+      .subscribe(({ descricao, valor }) => {
+        this.form.get('descricao').setValue(descricao);
+        this.form.get('valor').setValue(valor);
+      });
   }
 
   async load(options?: LoadingOptions): Promise<HTMLIonLoadingElement> {
@@ -60,7 +83,12 @@ export class NovaContaReceberPage implements OnInit {
     const loading = await this.load();
     try {
       console.log(this.form.value);
-      await this.contaReceberService.create(this.form.value);
+      const conta = !this.contaId
+        ? await this.contaReceberService.create(this.form.value)
+        : await this.contaReceberService.update({
+          id: this.contaId,
+          ...this.form.value
+        });
       this.navCtrl.navigateBack('/tabs/receber');
     } catch (e) {
       console.log('Erro ao tentar salvar conta', e);

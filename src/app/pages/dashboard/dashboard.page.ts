@@ -2,6 +2,8 @@ import { AuthService } from './../../core/auth/auth.service';
 import { Calculador } from './../../core/classes/calculador';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingOptions } from '@ionic/core';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,11 +22,21 @@ export class DashboardPage {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private calculador: Calculador) {
+    private calculador: Calculador,
+    private loadingController: LoadingController) {
   }
 
-  private carregaPerfil() {
-    this.authService.authState$
+  async load(options?: LoadingOptions): Promise<HTMLIonLoadingElement> {
+    const load = await this.loadingController.create({
+      message: 'Carregando contas...',
+      ...options
+    });
+    load.present();
+    return load;
+  }
+
+  private async carregaPerfil() {
+    await this.authService.authState$
       .subscribe(user => (
         this.nomeUsuario = user.displayName,
         this.foto = user.photoURL
@@ -43,8 +55,9 @@ export class DashboardPage {
 
 
   async ionViewWillEnter() {
+    const load = await this.load();
     try {
-      this.carregaPerfil();
+      await this.carregaPerfil();
       await this.calculador.loadContasPagar();
       await this.calculador.loadContasReceber();
       this.totalReceber = await this.calculador.calculaTotalReceber();
@@ -53,6 +66,7 @@ export class DashboardPage {
       console.log("Erro", e);
     } finally {
       this.alteraCorSaldo();
+      load.dismiss();
     }
   }
 

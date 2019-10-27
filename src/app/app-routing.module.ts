@@ -16,7 +16,17 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'editar-conta-receber/:id',
+    loadChildren: './pages/nova-conta-receber/nova-conta-receber.module#NovaContaReceberPageModule',
+    canLoad: [AuthGuard]
+  },
+  {
     path: 'nova-conta-pagar',
+    loadChildren: './pages/nova-conta-pagar/nova-conta-pagar.module#NovaContaPagarPageModule',
+    canLoad: [AuthGuard]
+  },
+  {
+    path: 'editar-conta-pagar/:id',
     loadChildren: './pages/nova-conta-pagar/nova-conta-pagar.module#NovaContaPagarPageModule',
     canLoad: [AuthGuard]
   },
