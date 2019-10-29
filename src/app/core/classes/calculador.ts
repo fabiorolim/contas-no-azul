@@ -1,4 +1,3 @@
-import { LoadingController } from '@ionic/angular';
 import { Conta } from '../models/conta.model';
 import { Injectable } from '@angular/core';
 import { ContaPagarService } from '../services/conta-pagar.service';
@@ -37,7 +36,6 @@ export class Calculador {
         this.contasReceber$ = this.contaReceberService.getAll();
         this.contasReceber$.subscribe(contas => {
             this.contasReceber = contas;
-            // load.dismiss();
         });
         console.log(this.contasPagar$);
         console.log(this.contasPagar);

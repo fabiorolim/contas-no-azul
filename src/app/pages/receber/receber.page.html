@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content padding>
+  
   <h1>Contas a Receber</h1>
-  <ion-searchbar placeholder="Buscar"></ion-searchbar>
   <ion-list *ngIf="(contas$ | async) as contas">
     <ng-container *ngIf="contas.length > 0; else noContas">
       <app-item-conta *ngFor="let conta of contas" [conta]="conta" (update)="onUpdate($event)"
