@@ -42,21 +42,11 @@ export class Calculador {
     }
 
     async calculaTotalReceber(): Promise<number> {
-        let total = 0;
-        for (let conta of this.contasReceber) {
-            console.log(conta);
-            total += conta.valor;
-        }
-        return total;
+        return this.contasReceber.reduce((total, conta) => total + conta.valor, 0);
     }
 
     async calculaTotalPagar(): Promise<number> {
-        let total = 0;
-        for (let conta of this.contasPagar) {
-            console.log(conta);
-            total += conta.valor;
-        }
-        return total;
+        return this.contasPagar.reduce((total, conta) => total + conta.valor, 0);
     }
 }
 
