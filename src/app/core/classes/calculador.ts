@@ -17,6 +17,8 @@ export class Calculador {
 
     contasPagar$: Observable<Conta[]>;
     contasReceber$: Observable<Conta[]>;
+    totalPagar: number;
+    totalReceber: number;
 
     constructor(
         private contaPagarService: ContaPagarService,
@@ -24,29 +26,34 @@ export class Calculador {
     ) { }
 
 
-    async loadContasPagar() {
-        this.contasPagar$ = await this.contaPagarService.getAll();
-        await this.contasPagar$.subscribe(contas => {
-            this.contasPagar = contas;
+    getTotalPagar() {
+        this.contaPagarService.getAll().subscribe(contas => {
+            this.totalPagar = contas.reduce((total, conta) => total + conta.valor, 0);
+            console.log(this.totalPagar);
+            return this.totalPagar;
         });
-        console.log(this.contasPagar$);
+        return this.totalPagar;
     }
 
-    loadContasReceber() {
-        this.contasReceber$ = this.contaReceberService.getAll();
-        this.contasReceber$.subscribe(contas => {
-            this.contasReceber = contas;
+    getTotalReceber() {
+        this.contaReceberService.getAll().subscribe(contas => {
+            this.totalReceber = contas.reduce((total, conta) => total + conta.valor, 0);
+            console.log(this.totalReceber);
+            return this.totalReceber;
         });
-        console.log(this.contasPagar$);
-        console.log(this.contasPagar);
+        return this.totalReceber;
     }
 
-    async calculaTotalReceber(): Promise<number> {
-        return this.contasReceber.reduce((total, conta) => total + conta.valor, 0);
-    }
+    // calculaTotal(contas: Conta[]){
+    //     return contas.reduce((total, conta) => total + conta.valor, 0);
+    // }
 
-    async calculaTotalPagar(): Promise<number> {
-        return this.contasPagar.reduce((total, conta) => total + conta.valor, 0);
-    }
+    // async calculaTotalReceber(): Promise<number> {
+    //     return this.contasReceber.reduce((total, conta) => total + conta.valor, 0);
+    // }
+
+    // async calculaTotalPagar(): Promise<number> {
+    //     return this.contasPagar.reduce((total, conta) => total + conta.valor, 0);
+    // }
 }
 

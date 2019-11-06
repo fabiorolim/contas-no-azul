@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController } from '@ionic/angular';
+import { of } from 'rxjs';
+import { mergeMap, concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +31,6 @@ export class DashboardPage {
   async load(options?: LoadingOptions): Promise<HTMLIonLoadingElement> {
     const load = await this.loadingController.create({
       message: 'Carregando contas...',
-      ...options
     });
     load.present();
     return load;
@@ -39,9 +40,9 @@ export class DashboardPage {
     await this.authService.authState$
       .subscribe(user => (
         this.nomeUsuario = user.displayName,
-        this.foto = user.photoURL
+        this.foto = user.photoURL,
+        console.log(this.nomeUsuario)
       ));
-    // console.log(this.nomeUsuario);
   }
 
 
@@ -54,20 +55,27 @@ export class DashboardPage {
   }
 
 
-  async ionViewWillEnter() {
-    const load = await this.load();
-    try {
-      await this.carregaPerfil();
-      await this.calculador.loadContasPagar();
-      await this.calculador.loadContasReceber();
-      this.totalReceber = await this.calculador.calculaTotalReceber();
-      this.totalPagar = await this.calculador.calculaTotalPagar();
-    } catch (e) {
-      console.log("Erro", e);
-    } finally {
-      this.alteraCorSaldo();
-      load.dismiss();
-    }
+  // async ionViewWillEnter() {
+  //   const load = await this.load();
+  //   try {
+  //     await this.carregaPerfil();
+  //     await this.calculador.loadContasPagar();
+  //     await this.calculador.loadContasReceber();
+  //     this.totalReceber = await this.calculador.calculaTotalReceber();
+  //     this.totalPagar = await this.calculador.calculaTotalPagar();
+  //   } catch (e) {
+  //     console.log("Erro", e);
+  //   } finally {
+  //     this.alteraCorSaldo();
+  //     load.dismiss();
+  //   }
+  // }
+
+  ionViewWillEnter() {
+    this.carregaPerfil()
+      .then(() => this.totalPagar = this.calculador.getTotalPagar())
+      .then(() => this.totalReceber = this.calculador.getTotalReceber())
+      .then(() => this.alteraCorSaldo());
   }
 
   sair() {
