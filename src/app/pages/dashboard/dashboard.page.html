@@ -6,53 +6,55 @@
 </ion-header>
 
 <ion-content padding>
-  <h1>Dashboard</h1>
-  <ion-avatar>
-    <img async [src]="foto">
-  </ion-avatar>
-  <div text-center>
-    <h2>{{ nomeUsuario }}</h2>
+  <div *ngIf="data">
+    <h1>Dashboard</h1>
+    <ion-avatar>
+      <img async [src]="foto">
+    </ion-avatar>
+    <div text-center>
+      <h2>{{ nomeUsuario }}</h2>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card async [color]="cor">
+            <ion-card-title>
+              Saldo
+            </ion-card-title>
+            <ion-card-content>
+              <h2>R$ {{data.saldo}}</h2>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card color="medium">
+            <ion-card-title>
+              Total a pagar
+            </ion-card-title>
+            <ion-card-content>
+              <h2>R$ {{data.total_pagar}}</h2>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card color="medium">
+            <ion-card-title>Total a receber</ion-card-title>
+            <ion-card-content>
+              R$ {{data.total_receber}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="sair()" expand="block" shape="round">Sair</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-card async [color]="cor">
-          <ion-card-title>
-            Saldo
-          </ion-card-title>
-          <ion-card-content>
-            <h2>R$ {{totalReceber - totalPagar}}</h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-card color="medium">
-          <ion-card-title>
-            Total a pagar
-          </ion-card-title>
-          <ion-card-content>
-            <h2>R$ {{totalPagar}}</h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-card color="medium">
-          <ion-card-title>Total a receber</ion-card-title>
-          <ion-card-content>
-            R$ {{totalReceber}}
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="sair()" expand="block" shape="round">Sair</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 
 </ion-content>

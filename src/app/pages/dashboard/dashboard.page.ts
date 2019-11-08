@@ -19,7 +19,7 @@ export class DashboardPage {
   totalReceber: number;
   nomeUsuario: string;
   foto: string;
-
+  data: any;
 
   constructor(
     private router: Router,
@@ -72,10 +72,12 @@ export class DashboardPage {
   // }
 
   ionViewWillEnter() {
-    this.carregaPerfil()
-      .then(() => this.totalPagar = this.calculador.getTotalPagar())
-      .then(() => this.totalReceber = this.calculador.getTotalReceber())
-      .then(() => this.alteraCorSaldo());
+    this.calculador.calculate().then((data) => {
+      this.data = data;
+      console.log(this.data);
+      this.alteraCorSaldo();
+      this.carregaPerfil();
+    })
   }
 
   sair() {
